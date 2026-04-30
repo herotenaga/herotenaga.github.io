@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<title>Hero Tenaga · Free Time-of-Use bill checker for TNB customers</title>
+<meta name="description" content="A free, independent tool that reads your myTNB SmartLiving usage and shows whether the Time-of-Use tariff would save you money. Built by a Malaysian energy analyst.">
+<meta name="keywords" content="TNB Time-of-Use, TOU tariff Malaysia, TNB tariff calculator, myTNB SmartLiving, Malaysia electricity bill, peak off-peak tariff, TNB bill checker">
+<meta name="author" content="Hero Tenaga">
+<link rel="canonical" href="https://herotenaga.github.io/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Hero Tenaga · Free Time-of-Use bill checker for TNB customers">
+<meta property="og:description" content="See whether the Time-of-Use tariff would save you money. Free, independent, runs on your own device.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://herotenaga.github.io/">
+<meta property="og:image" content="https://herotenaga.github.io/report-preview.png">
+<meta property="og:locale" content="en_MY">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hero Tenaga · Free TNB Time-of-Use bill checker">
+<meta name="twitter:description" content="See whether the Time-of-Use tariff would save you money on your TNB bill.">
+<meta name="twitter:image" content="https://herotenaga.github.io/report-preview.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Hero Tenaga",
+  "operatingSystem": "Chrome browser",
+  "applicationCategory": "UtilityApplication",
+  "description": "Free Time-of-Use tariff checker for TNB customers in Malaysia. Reads myTNB SmartLiving usage data and shows your bill under both tariffs.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MYR" },
+  "url": "https://herotenaga.github.io/"
+}
+</script>
+
+<link rel="icon" type="image/png" sizes="128x128" href="icon128.png">
+<link rel="apple-touch-icon" href="icon128.png">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0F172A;
+    --surface:   #131C30;
+    --surface-2: #1A2640;
+    --green:     #22C55E;
+    --green-d:   #16A34A;
+    --text:      #F8FAFC;
+    --text-2:    #94A3B8;
+    --text-3:    #64748B;
+    --border:    rgba(255,255,255,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  header {
+    padding: 28px 0 0;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .mark {
+    width: 28px;
+    height: 28px;
+    background: var(--green);
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 56px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 16ch;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 56ch;
+    margin-bottom: 36px;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--green);
+    color: var(--bg);
+    border: 0;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.08s;
+    font-family: inherit;
+  }
+
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-primary:active { transform: translateY(1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 14px 8px;
+    transition: color 0.15s;
+  }
+
+  .btn-ghost:hover { color: var(--text); }
+
+  .preview {
+    margin-top: 56px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 64px 0;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-size: clamp(26px, 3.5vw, 34px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 18px;
+    max-width: 22ch;
+  }
+
+  .lead {
+    font-size: 17px;
+    color: var(--text-2);
+    max-width: 60ch;
+    margin-bottom: 36px;
+  }
+
+  /* WHY — quote-style */
+  .why {
+    border-top: 1px solid var(--border);
+  }
+
+  .why blockquote {
+    font-size: clamp(22px, 2.8vw, 26px);
+    line-height: 1.4;
+    color: var(--text);
+    font-weight: 500;
+    max-width: 28ch;
+    margin: 0 0 28px;
+    letter-spacing: -0.015em;
+  }
+
+  .why blockquote::before {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--green);
+    margin-bottom: 22px;
+  }
+
+  /* HOW — step rows with screenshots */
+  .how { border-top: 1px solid var(--border); }
+
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 8px;
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .step-text { padding: 0; }
+
+  .step-num {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+  }
+
+  .step-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.6;
+    max-width: 38ch;
+  }
+
+  .step-image {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .step-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    .step-row { grid-template-columns: 1fr; gap: 16px; }
+    .step-image { order: -1; }
+  }
+
+  /* INSTALL */
+  .install { border-top: 1px solid var(--border); }
+
+  .install-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .install-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .install-text {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .install-title {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .install-desc {
+    font-size: 14px;
+    color: var(--text-2);
+  }
+
+  .install-meta {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--text-3);
+    text-align: center;
+  }
+
+  .install-meta a {
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--text-3);
+  }
+
+  .install-meta a:hover { color: var(--text); border-bottom-color: var(--text-2); }
+
+  .install-meta code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    background: rgba(255,255,255,0.04);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* FAQ */
+  .faq { border-top: 1px solid var(--border); }
+
+  details {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+
+  details:first-of-type { border-top: 1px solid var(--border); margin-top: 8px; }
+
+  summary {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  .faq-mark {
+    color: var(--text-3);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+
+  details[open] .faq-mark {
+    transform: rotate(45deg);
+    color: var(--green);
+  }
+
+  details p {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin-top: 12px;
+    max-width: 60ch;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 0;
+    margin-top: 48px;
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-meta {
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .footer-meta a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+
+  .footer-meta a:hover { color: var(--text); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+  }
+
+  .footer-links a {
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  /* MISC */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="/" class="brand" aria-label="Hero Tenaga home">
+      <span class="mark">
+        <svg width="13" height="15" viewBox="0 0 10 12" aria-hidden="true">
+          <path d="M6 0L0 7h4l-1 5L9 5H5L6 0z" fill="#0F172A"/>
+        </svg>
+      </span>
+      <span class="brand-name">Hero Tenaga</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span> Free · Independent · Runs on your device
+      </div>
+      <h1>See if Time-of-Use saves you money on your <em>TNB bill</em>.</h1>
+      <p class="hero-sub">Hero Tenaga reads the half-hourly usage data already in your myTNB SmartLiving account and shows your bill under both the general and Time-of-Use tariffs. Your data never leaves your browser.</p>
+      <div class="cta-row">
+        <a href="#install" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Install for Chrome
+        </a>
+        <a href="#how" class="btn-ghost">See how it works
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="preview">
+        <img src="report-preview.png" alt="Sample Hero Tenaga report showing a side-by-side comparison of the general tariff (RM334.85) and Time-of-Use tariff (RM324.33) for a Malaysian household, with a recommendation to switch.">
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="section-eyebrow">Why this exists</div>
+      <blockquote>Your usage. Your data. Your decision.</blockquote>
+      <p class="lead">TNB rolled out the Time-of-Use tariff in July 2025, and households were left to figure out whether to switch on their own. The data to answer this question is already yours. The tool to read it should not cost you anything. Hero Tenaga is that tool, free for anyone with a TNB account, built and maintained independently.</p>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-eyebrow">How it works</div>
+      <h2>Three steps. About a minute.</h2>
+
+      <div class="steps-list">
+
+        <div class="step-row">
+          <div class="step-text">
+            <span class="step-num">Step 1</span>
+            <div class="step-title">Open My Energy</div>
+            <p class="step-desc">From your myTNB dashboard, click <strong style="color:var(--text);font-weight:500;">View Energy Usage</strong> to open SmartLiving in a new tab.</p>
+          </div>
+          <div class="step-image">
+            <img src="step-1.png" alt="myTNB account dashboard with View Energy Usage link highlighted in the Active Account panel.">
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-text">
+            <span class="step-num">Step 2</span>
+            <div class="step-title">Switch to My Energy and click the icon</div>
+            <p class="step-desc">On SmartLiving, open the <strong style="color:var(--text);font-weight:500;">My Energy</strong> tab, then click the Hero Tenaga icon in your browser toolbar.</p>
+          </div>
+          <div class="step-image">
+            <img src="step-2.png" alt="SmartLiving My Energy tab open in Chrome, with the Hero Tenaga toolbar icon highlighted at the top of the browser.">
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-text">
+            <span class="step-num">Step 3</span>
+            <div class="step-title">Run the analysis</div>
+            <p class="step-desc">Confirm your billing dates and click <strong style="color:var(--text);font-weight:500;">Run analysis</strong>. Your report appears in about a minute.</p>
+          </div>
+          <div class="step-image">
+            <img src="step-3.png" alt="Hero Tenaga popup showing the Run analysis button highlighted, ready to read the user's energy data.">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="install" id="install">
+    <div class="container">
+      <div class="section-eyebrow">Install</div>
+      <h2>Add Hero Tenaga to Chrome.</h2>
+      <p class="lead">Free, no account required. Works on Chrome, Edge, and other Chromium browsers on desktop.</p>
+
+      <div class="install-card">
+        <div class="install-icon">
+          <svg width="28" height="32" viewBox="0 0 10 12" aria-hidden="true">
+            <path d="M6 0L0 7h4l-1 5L9 5H5L6 0z" fill="#0F172A"/>
+          </svg>
+        </div>
+        <div class="install-text">
+          <div class="install-title">Hero Tenaga for Chrome</div>
+          <div class="install-desc">Pending Chrome Web Store review. Install the developer build below.</div>
+        </div>
+        <a href="https://github.com/herotenaga/herotenaga/releases/latest/download/herotenaga-extension.zip" class="btn-primary">
+          Download&nbsp;build
+        </a>
+      </div>
+
+      <p class="install-meta">
+        Manual install: unzip, open <code>chrome://extensions</code>, turn on Developer mode, click <strong>Load unpacked</strong>, and select the folder. Full guide on <a href="https://github.com/herotenaga/herotenaga#install" rel="noopener">GitHub</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-eyebrow">Questions</div>
+      <h2>Common questions.</h2>
+
+      <details>
+        <summary>Where does my data go?<span class="faq-mark">+</span></summary>
+        <p>Your usage data stays on your device. It is read from the myTNB page in your browser, processed locally, and shown only to you. The only information that ever leaves your device is what you choose to share through the optional contribution survey at the end of the report.</p>
+      </details>
+
+      <details>
+        <summary>What does the report show?<span class="faq-mark">+</span></summary>
+        <p>A side-by-side comparison of your bill under both tariffs, your peak versus off-peak split, your usage pattern by hour of day, and a clear recommendation. If switching saves you money, you'll see how much. If it doesn't, you'll see why not.</p>
+      </details>
+
+      <details>
+        <summary>What is Time-of-Use, exactly?<span class="faq-mark">+</span></summary>
+        <p>An optional tariff TNB introduced where electricity costs more during weekday peak hours (2pm to 10pm) and less at all other times. If most of your usage falls outside peak hours, you pay less than the general tariff. If it doesn't, you pay more.</p>
+      </details>
+
+      <details>
+        <summary>Does it work on mobile?<span class="faq-mark">+</span></summary>
+        <p>Not yet. The current version runs as a desktop browser extension because that is where myTNB SmartLiving works best. A mobile-friendly approach is being explored.</p>
+      </details>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-meta">
+        © 2026 Hero Tenaga · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="license noopener">CC BY-NC-ND 4.0</a>
+      </div>
+      <div class="footer-links">
+        <a href="#why">Why</a>
+        <a href="#how">How</a>
+        <a href="#install">Install</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
