@@ -225,14 +225,19 @@
 
     <div class="eyebrow">Privacy Policy</div>
     <h1>How Hero Tenaga handles your data.</h1>
-    <p class="updated">Last updated: 1 May 2026</p>
+    <p class="updated">Last updated: 2 May 2026</p>
 
     <div class="summary">
       <p><strong>Short version.</strong> Hero Tenaga reads your usage data from your myTNB SmartLiving page in your own browser, calculates your bills under both tariffs, and shows you the result. Nothing is sent to any server during this process. The only information that ever leaves your device is what you choose to share through the optional contribution survey at the end of the report.</p>
     </div>
 
+    <h2>Relationship to TNB and myTNB</h2>
+    <p>Hero Tenaga is an independent third-party tool. It is not affiliated with, endorsed by, or operated on behalf of Tenaga Nasional Berhad (TNB), TNB Retail Sdn Bhd, or any TNB subsidiary.</p>
+    <p>The extension reads consumption data that TNB's myTNB SmartLiving website displays to you in your own browser. It does not log in on your behalf, does not access TNB's servers directly, and does not modify TNB's website. It performs the same kind of calculation a user could do manually with the data they already see on screen.</p>
+    <p>Hero Tenaga does not transmit your data to TNB. Hero Tenaga has no business relationship with TNB and does not receive any compensation from TNB or any solar installer, retailer, or service provider.</p>
+
     <h2>What the extension reads</h2>
-    <p>When you click <strong>Run analysis</strong> on your myTNB SmartLiving My Energy tab, Hero Tenaga reads your half-hourly electricity usage data for the billing period you specify, as displayed in your SmartLiving dashboard. This data is read from the page in your browser and processed locally. It is never transmitted to any server.</p>
+    <p>When you click <strong>Run analysis</strong> on your myTNB SmartLiving My Energy tab, Hero Tenaga reads your half-hourly electricity usage data for the billing period you specify, as displayed in your SmartLiving dashboard. This data is read from the page in your browser and processed locally as part of the analysis itself.</p>
 
     <h2>What the extension transmits</h2>
     <p>The extension transmits no data automatically.</p>
@@ -244,27 +249,28 @@
       <li>Your highest hourly load (peak load) and the hour it occurred</li>
       <li>Your lowest hourly load (trough load) and the hour it occurred</li>
       <li>The household profile information you choose to include (state, dwelling type, occupant count, daytime occupancy, air conditioning, solar, EV, and similar fields)</li>
-      <li>Your free-text feedback and email if you provide them</li>
+      <li>Your free-text feedback if you provide it</li>
     </ul>
-    <p>This information is sent without any account, login, or other personal identifier. The community registry is hosted on Supabase, a third-party database provider.</p>
+    <p>This information is sent without any account, login, email address, or other personal identifier. The community registry is hosted on Supabase, a database service provided by Supabase Inc. Supabase acts as a data processor on behalf of Hero Tenaga and does not use this data for its own purposes. Their privacy policy is available at <a href="https://supabase.com/privacy">supabase.com/privacy</a>.</p>
 
     <h2>What the extension does not do</h2>
     <ul>
       <li>It does not log in to your TNB account on your behalf</li>
-      <li>It does not transmit your usage data anywhere — all analysis happens in your browser</li>
-      <li>It does not collect your name, email, phone number, address, or any other personal identifier</li>
+      <li>It does not transmit your usage data anywhere as part of the analysis itself — all calculations happen in your browser</li>
+      <li>It does not collect your name, email address, phone number, mailing address, or any account or meter identifier</li>
+      <li>It does not use cookies, fingerprinting, analytics, or any user-tracking technology</li>
       <li>It does not track your browsing across other websites</li>
       <li>It does not show advertisements or send marketing communications</li>
-      <li>It does not share data with TNB or any other third party</li>
+      <li>It does not share data with TNB or any other third party beyond the database processor named above (Supabase)</li>
     </ul>
 
     <h2>Local storage of household details (for prefill)</h2>
     <p>If you submit the contribution survey, the extension saves your nine household answers (state, district, property type, built-up area, occupants, daytime occupancy, air conditioning, solar, EV ownership) to your browser's local storage. The next time you open the survey, these fields are pre-filled so you don't have to retype them.</p>
-    <p>This data is stored only on your device, scoped to the myTNB SmartLiving website, and never transmitted anywhere. The wishlist, free-text feedback, and email fields are never saved locally — they start fresh every time. You can clear the saved details at any time using the "Clear and start fresh" link inside the survey form, or by uninstalling the extension.</p>
+    <p>This data is stored only on your device, scoped to the myTNB SmartLiving website, and never transmitted anywhere. The wishlist and free-text feedback fields are never saved locally — they start fresh every time. You can clear the saved details at any time using the "Clear and start fresh" link inside the survey form, or by uninstalling the extension.</p>
 
     <h2>Retention of contribution data</h2>
     <p>Submitted contribution survey data is retained indefinitely as part of the community registry, which is the basis for future community benchmarking features.</p>
-    <p>Because contributions are submitted anonymously without any personal identifier, there is no way to identify which submission was yours, and therefore no way to delete an individual submission on request. If you do not want your data to form part of the community registry, simply do not submit the contribution survey.</p>
+    <p>Because contributions are submitted without any personal identifier, there is no way to identify which submission was yours, and therefore no way to delete an individual submission on request. If you do not want your data to form part of the community registry, simply do not submit the contribution survey.</p>
 
     <h2>Children</h2>
     <p>This extension is intended for adults managing their household electricity bill. We do not knowingly collect any data from children.</p>
