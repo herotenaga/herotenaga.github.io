@@ -237,18 +237,22 @@
     <p>Hero Tenaga does not transmit your data to TNB. Hero Tenaga has no business relationship with TNB and does not receive any compensation from TNB or any solar installer, retailer, or service provider.</p>
 
     <h2>What the extension reads</h2>
-    <p>When you click <strong>Run analysis</strong> on your myTNB SmartLiving My Energy tab, Hero Tenaga reads your half-hourly electricity usage data for the billing period you specify, as displayed in your SmartLiving dashboard. This data is read from the page in your browser and processed locally as part of the analysis itself.</p>
+    <p>When you click <strong>Run analysis</strong>, the extension navigates the SmartLiving My Energy chart through each day of your specified billing period and reads the half-hourly usage data the page exposes in your browser. All processing happens locally on your device.</p>
 
     <h2>What the extension transmits</h2>
     <p>The extension transmits no data automatically.</p>
     <p>The only time information leaves your device is when you choose to submit the optional contribution survey at the end of the report. If you submit it, the following information is sent to the Hero Tenaga community registry:</p>
     <ul>
-      <li>Your billing period dates</li>
-      <li>Your total kWh used and your total bill amount</li>
-      <li>Your computed peak versus off-peak split, daytime versus nighttime split</li>
+      <li>Your billing period dates (start, end, and billing month)</li>
+      <li>Your total kWh used during the billing period</li>
+      <li>Your computed peak versus off-peak usage split</li>
+      <li>Your computed daytime versus nighttime usage split</li>
       <li>Your highest hourly load (peak load) and the hour it occurred</li>
       <li>Your lowest hourly load (trough load) and the hour it occurred</li>
-      <li>The household profile information you choose to include (state, dwelling type, occupant count, daytime occupancy, air conditioning, solar, EV, and similar fields)</li>
+      <li>The Hero Tenaga verdict for your billing period (Switch, Stay, or Marginal)</li>
+      <li>The difference in Ringgit between your bill under the General tariff and the Time-of-Use tariff</li>
+      <li>The household profile information you choose to include from the survey: state, district, dwelling type, built-up area, occupant count, daytime occupancy, air conditioning, solar system, and EV ownership</li>
+      <li>Your selection from the feature wishlist multiple-choice question</li>
       <li>Your free-text feedback if you provide it</li>
     </ul>
     <p>This information is sent without any account, login, email address, or other personal identifier. The community registry is hosted on Supabase, a database service provided by Supabase Inc. Supabase acts as a data processor on behalf of Hero Tenaga and does not use this data for its own purposes. Their privacy policy is available at <a href="https://supabase.com/privacy">supabase.com/privacy</a>.</p>
