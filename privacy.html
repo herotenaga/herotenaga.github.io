@@ -240,21 +240,27 @@
     <ul>
       <li>Your billing period dates</li>
       <li>Your total kWh used and your total bill amount</li>
-      <li>Your computed peak versus off-peak split</li>
-      <li>The household profile information you choose to include (state, household type, dwelling type, occupant count, and similar fields)</li>
-      <li>Your free-text feedback if you provide any</li>
+      <li>Your computed peak versus off-peak split, daytime versus nighttime split</li>
+      <li>Your highest hourly load (peak load) and the hour it occurred</li>
+      <li>Your lowest hourly load (trough load) and the hour it occurred</li>
+      <li>The household profile information you choose to include (state, dwelling type, occupant count, daytime occupancy, air conditioning, solar, EV, and similar fields)</li>
+      <li>Your free-text feedback and email if you provide them</li>
     </ul>
-    <p>This information is sent without any account, login, email address, or other personal identifier. The community registry is hosted on Supabase, a third-party database provider.</p>
+    <p>This information is sent without any account, login, or other personal identifier. The community registry is hosted on Supabase, a third-party database provider.</p>
 
     <h2>What the extension does not do</h2>
     <ul>
       <li>It does not log in to your TNB account on your behalf</li>
-      <li>It does not store your usage data anywhere</li>
+      <li>It does not transmit your usage data anywhere — all analysis happens in your browser</li>
       <li>It does not collect your name, email, phone number, address, or any other personal identifier</li>
       <li>It does not track your browsing across other websites</li>
       <li>It does not show advertisements or send marketing communications</li>
       <li>It does not share data with TNB or any other third party</li>
     </ul>
+
+    <h2>Local storage of household details (for prefill)</h2>
+    <p>If you submit the contribution survey, the extension saves your nine household answers (state, district, property type, built-up area, occupants, daytime occupancy, air conditioning, solar, EV ownership) to your browser's local storage. The next time you open the survey, these fields are pre-filled so you don't have to retype them.</p>
+    <p>This data is stored only on your device, scoped to the myTNB SmartLiving website, and never transmitted anywhere. The wishlist, free-text feedback, and email fields are never saved locally — they start fresh every time. You can clear the saved details at any time using the "Clear and start fresh" link inside the survey form, or by uninstalling the extension.</p>
 
     <h2>Retention of contribution data</h2>
     <p>Submitted contribution survey data is retained indefinitely as part of the community registry, which is the basis for future community benchmarking features.</p>
