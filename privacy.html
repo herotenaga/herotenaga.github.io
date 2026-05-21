@@ -225,7 +225,7 @@
 
     <div class="eyebrow">Privacy Policy</div>
     <h1>How Hero Tenaga handles your data.</h1>
-    <p class="updated">Last updated: 2 May 2026</p>
+    <p class="updated">Last updated: 21 May 2026</p>
 
     <div class="summary">
       <p><strong>Short version.</strong> Hero Tenaga reads your usage data from your myTNB SmartLiving page in your own browser, calculates your bills under both tariffs, and shows you the result. Nothing is sent to any server during this process. The only information that ever leaves your device is what you choose to share through the optional contribution survey at the end of the report.</p>
@@ -238,6 +238,9 @@
 
     <h2>What the extension reads</h2>
     <p>When you click <strong>Run analysis</strong>, the extension navigates the SmartLiving My Energy chart through each day of your specified billing period and reads the half-hourly usage data the page exposes in your browser. All processing happens locally on your device.</p>
+
+    <h2>If you are already on the Time-of-Use (TOU) tariff</h2>
+    <p>If the extension detects that you are currently on TOU rather than General, it does not collect, calculate, store, or transmit any usage data for you. It simply displays a notice that TOU-user analysis is coming in a future release. You can close the notice and no further processing takes place.</p>
 
     <h2>What the extension transmits</h2>
     <p>The extension transmits no data automatically.</p>
@@ -269,9 +272,16 @@
       <li>It does not share data with TNB or any other third party beyond the database processor named above (Supabase)</li>
     </ul>
 
-    <h2>Local storage of household details (for prefill)</h2>
-    <p>If you submit the contribution survey, the extension saves your nine household answers (state, district, property type, built-up area, occupants, daytime occupancy, air conditioning, solar, EV ownership) to your browser's local storage. The next time you open the survey, these fields are pre-filled so you don't have to retype them.</p>
-    <p>This data is stored only on your device, scoped to the myTNB SmartLiving website, and never transmitted anywhere. The wishlist and free-text feedback fields are never saved locally — they start fresh every time. You can clear the saved details at any time using the "Clear and start fresh" link inside the survey form, or by uninstalling the extension.</p>
+    <h2>Local storage on your device</h2>
+    <p>Hero Tenaga saves two kinds of information to your browser's local storage, scoped to the myTNB SmartLiving website. Both are stored only on your device and never transmitted anywhere automatically.</p>
+
+    <h3>Bill history</h3>
+    <p>Each time you run analysis on a billing period, a summary of that run is saved so you can compare it later: the billing period dates, total kWh, verdict (Switch, Stay, or Marginal), Ringgit difference between tariffs, peak versus off-peak split, day versus night split, and a flag indicating whether you contributed it to the community registry. This history powers the bill comparison feature in the report. You can delete an individual bill from history by clicking the × next to it in the bill picker inside the report, or clear all stored bills using the <strong>Clear all bills</strong> option in the same picker. Either action only affects your local storage — anonymous contributions you already submitted to the community registry are unaffected.</p>
+
+    <h3>Household details for survey prefill</h3>
+    <p>If you submit the contribution survey, the extension saves your nine household answers (state, district, property type, built-up area, occupants, daytime occupancy, air conditioning, solar, EV ownership) so that the next time you open the survey, these fields are pre-filled. The wishlist and free-text feedback fields are never saved locally — they start fresh every time. You can clear these saved details using the <strong>Clear and start fresh</strong> link inside the survey form, or by uninstalling the extension.</p>
+
+    <p>Uninstalling the extension clears all local storage data immediately.</p>
 
     <h2>Retention of contribution data</h2>
     <p>Submitted contribution survey data is retained indefinitely as part of the community registry, which is the basis for future community benchmarking features.</p>
