@@ -27,6 +27,7 @@
     --surface-2: #1A2640;
     --green:     #22C55E;
     --green-d:   #16A34A;
+    --amber:     #F59E0B;
     --text:      #F8FAFC;
     --text-2:    #94A3B8;
     --text-3:    #64748B;
@@ -209,12 +210,6 @@
     margin-left: 2px;
   }
 
-  .stat-value .denom {
-    color: var(--text-3);
-    font-size: 18px;
-    font-weight: 500;
-  }
-
   @media (max-width: 720px) {
     .stat-strip { grid-template-columns: repeat(2, 1fr); }
     .stat-cell { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -239,14 +234,14 @@
     line-height: 1.25;
     letter-spacing: -0.015em;
     margin-bottom: 10px;
-    max-width: 28ch;
+    max-width: 30ch;
   }
 
   .chart-sub {
     font-size: 14px;
     color: var(--text-2);
     line-height: 1.55;
-    max-width: 56ch;
+    max-width: 60ch;
     margin-bottom: 28px;
   }
 
@@ -258,6 +253,30 @@
   }
 
   .chart-svg { display: block; width: 100%; height: auto; }
+
+  .chart-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-2);
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+  }
 
   .states-block { margin-bottom: 56px; }
 
@@ -452,12 +471,12 @@
         <div class="stat-value" data-stat="n_total">31</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-label">Median usage</div>
+        <div class="stat-label">Median monthly usage</div>
         <div class="stat-value"><span data-stat="median_kwh">513</span><span class="unit">kWh</span></div>
       </div>
       <div class="stat-cell">
-        <div class="stat-label">Peak after 7pm</div>
-        <div class="stat-value"><span data-stat="peak_n_good">28</span><span class="denom">/<span data-stat="peak_n_total">30</span></span></div>
+        <div class="stat-label">Median peak share</div>
+        <div class="stat-value"><span data-stat="median_peak_pct">21</span><span class="unit">%</span></div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">States</div>
@@ -467,10 +486,15 @@
 
     <section class="chart-block">
       <div class="section-eyebrow">Why so many can switch</div>
-      <h2>Most household peaks land after TOU peak hours end.</h2>
-      <p class="chart-sub">Hour of daily peak load for switchers. The shaded zone is when TOU charges its peak rate (weekdays, 2pm to 10pm). Almost no one peaks during those hours.</p>
+      <h2>Most households spend only about a fifth of their power inside TOU peak hours.</h2>
+      <p class="chart-sub">Share of monthly kWh consumed during TOU peak (weekdays, 2pm to 10pm). The peak window covers 24% of weekly hours, so usage at or below that line means households are already consuming proportionally less when electricity is expensive. The off-peak rate covers the rest.</p>
       <div class="chart-wrap">
-        <div id="chart" role="img" aria-label="Bar chart showing distribution of peak load hours across switchers. Peaks cluster at 8pm to 10pm, outside TOU peak window."></div>
+        <div id="chart" role="img" aria-label="Distribution chart showing share of usage during TOU peak hours across 31 households. Most cluster between 15% and 25%."></div>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-swatch" style="background: #22C55E;"></span>Switch verdict (30)</span>
+          <span class="legend-item"><span class="legend-swatch" style="background: #F59E0B;"></span>Marginal (1)</span>
+          <span class="legend-item" style="color: var(--text-3);">Dashed line · 24% time-share baseline</span>
+        </div>
       </div>
     </section>
 
@@ -491,8 +515,12 @@
         Each row is one household submitting one TNB bill. Test entries and any billing window outside 28 to 31 days are excluded. Households already on TOU are excluded pending a fix to how the extension reads peak-period data on that tariff. Savings are calculated using the same RP4 tariff formulas TNB publishes.
       </p>
       <p>
+        <strong>What "peak share" means.</strong>
+        The percentage of a household's total monthly kWh that fell inside TOU peak hours (weekdays, 2pm to 10pm). If usage were spread evenly across all hours of the week, this number would be about 24%. Below that line, a household is effectively using less power when electricity is most expensive.
+      </p>
+      <p>
         <strong>A note on the sample.</strong>
-        The current sample is small and skews toward people who suspected TOU might help them. Read the headline rate as a directional signal, not a population-level claim. The "peak after 7pm" finding is the steadier observation.
+        The current sample is small and skews toward people who suspected TOU might help them. Read the headline rate as a directional signal, not a population-level claim. The distribution of peak share is the steadier observation.
       </p>
     </section>
 
@@ -527,10 +555,12 @@
 <script>
 const FALLBACK = {
   generated_at: "2026-05-25T22:30:11Z",
-  hourly: [
-    {h: 14, n: 0}, {h: 15, n: 1}, {h: 16, n: 0}, {h: 17, n: 0},
-    {h: 18, n: 1}, {h: 19, n: 4}, {h: 20, n: 6}, {h: 21, n: 18},
-    {h: 22, n: 0}, {h: 23, n: 0}
+  peak_pct_bins: [
+    {label: "10–15%", switch: 1, marginal: 0},
+    {label: "15–20%", switch: 8, marginal: 1},
+    {label: "20–25%", switch: 15, marginal: 0},
+    {label: "25–30%", switch: 4, marginal: 0},
+    {label: "30–35%", switch: 2, marginal: 0}
   ],
   states: [
     {name: "Selangor", n: 19},
@@ -573,121 +603,151 @@ function renderStates(states) {
   });
 }
 
-function renderChart(hourly) {
+function renderChart(bins) {
   const host = document.getElementById('chart');
-  if (!host || !Array.isArray(hourly)) return;
+  if (!host || !Array.isArray(bins)) return;
   host.innerHTML = '';
   const svgNs = 'http://www.w3.org/2000/svg';
-  const maxN = Math.max(1, ...hourly.map(d => d.n));
-  const W = 800, H = 240;
-  const padL = 16, padR = 16, padT = 32, padB = 36;
+
+  const W = 800, H = 280;
+  const padL = 56, padR = 24, padT = 24, padB = 56;
   const innerW = W - padL - padR;
   const innerH = H - padT - padB;
-  const colW = innerW / hourly.length;
+
+  const maxN = Math.max(1, ...bins.map(b => b.switch + b.marginal));
+  const yTicks = Math.ceil(maxN / 4) * 4;
+  const yStep = yTicks / 4;
+  const colW = innerW / bins.length;
+  const barW = colW * 0.62;
+
+  const baselinePct = 24;
+  const minPct = 10, maxPct = 35;
+  const baselineX = padL + ((baselinePct - minPct) / (maxPct - minPct)) * innerW;
 
   const svg = document.createElementNS(svgNs, 'svg');
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.setAttribute('class', 'chart-svg');
   svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-  const peakX1 = padL;
-  const peakX2 = padL + 8 * colW;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (i * innerH / 4);
+    const v = yTicks - (i * yStep);
+    const line = document.createElementNS(svgNs, 'line');
+    line.setAttribute('x1', padL);
+    line.setAttribute('y1', y);
+    line.setAttribute('x2', padL + innerW);
+    line.setAttribute('y2', y);
+    line.setAttribute('stroke', i === 4 ? '#64748B' : 'rgba(255,255,255,0.04)');
+    line.setAttribute('stroke-width', i === 4 ? '1' : '1');
+    svg.appendChild(line);
+    const lbl = document.createElementNS(svgNs, 'text');
+    lbl.setAttribute('x', padL - 10);
+    lbl.setAttribute('y', y + 4);
+    lbl.setAttribute('text-anchor', 'end');
+    lbl.setAttribute('font-size', '11');
+    lbl.setAttribute('fill', '#64748B');
+    lbl.textContent = v;
+    svg.appendChild(lbl);
+  }
 
-  const peakBg = document.createElementNS(svgNs, 'rect');
-  peakBg.setAttribute('x', peakX1);
-  peakBg.setAttribute('y', padT - 8);
-  peakBg.setAttribute('width', peakX2 - peakX1);
-  peakBg.setAttribute('height', innerH + 8);
-  peakBg.setAttribute('fill', '#1A2640');
-  svg.appendChild(peakBg);
+  const yAxisLabel = document.createElementNS(svgNs, 'text');
+  yAxisLabel.setAttribute('x', padL - 40);
+  yAxisLabel.setAttribute('y', padT + innerH / 2);
+  yAxisLabel.setAttribute('text-anchor', 'middle');
+  yAxisLabel.setAttribute('font-size', '11');
+  yAxisLabel.setAttribute('font-weight', '500');
+  yAxisLabel.setAttribute('fill', '#94A3B8');
+  yAxisLabel.setAttribute('letter-spacing', '0.04em');
+  yAxisLabel.style.textTransform = 'uppercase';
+  yAxisLabel.setAttribute('transform', `rotate(-90 ${padL - 40} ${padT + innerH / 2})`);
+  yAxisLabel.textContent = 'Households';
+  svg.appendChild(yAxisLabel);
 
-  const peakBoundary = document.createElementNS(svgNs, 'line');
-  peakBoundary.setAttribute('x1', peakX2);
-  peakBoundary.setAttribute('y1', padT - 8);
-  peakBoundary.setAttribute('x2', peakX2);
-  peakBoundary.setAttribute('y2', padT + innerH);
-  peakBoundary.setAttribute('stroke', '#64748B');
-  peakBoundary.setAttribute('stroke-width', '1');
-  peakBoundary.setAttribute('stroke-dasharray', '3,4');
-  svg.appendChild(peakBoundary);
+  const baseLineEl = document.createElementNS(svgNs, 'line');
+  baseLineEl.setAttribute('x1', baselineX);
+  baseLineEl.setAttribute('y1', padT);
+  baseLineEl.setAttribute('x2', baselineX);
+  baseLineEl.setAttribute('y2', padT + innerH);
+  baseLineEl.setAttribute('stroke', '#94A3B8');
+  baseLineEl.setAttribute('stroke-width', '1');
+  baseLineEl.setAttribute('stroke-dasharray', '4,4');
+  svg.appendChild(baseLineEl);
 
-  const peakLabel = document.createElementNS(svgNs, 'text');
-  peakLabel.setAttribute('x', peakX1 + 10);
-  peakLabel.setAttribute('y', padT - 14);
-  peakLabel.setAttribute('font-size', '11');
-  peakLabel.setAttribute('font-weight', '500');
-  peakLabel.setAttribute('fill', '#94A3B8');
-  peakLabel.setAttribute('letter-spacing', '0.04em');
-  peakLabel.style.textTransform = 'uppercase';
-  peakLabel.textContent = 'TOU PEAK · 2PM – 10PM';
-  svg.appendChild(peakLabel);
+  const baseLineLbl = document.createElementNS(svgNs, 'text');
+  baseLineLbl.setAttribute('x', baselineX + 6);
+  baseLineLbl.setAttribute('y', padT + 10);
+  baseLineLbl.setAttribute('font-size', '10.5');
+  baseLineLbl.setAttribute('font-weight', '500');
+  baseLineLbl.setAttribute('fill', '#94A3B8');
+  baseLineLbl.textContent = '24% baseline';
+  svg.appendChild(baseLineLbl);
 
-  const offLabel = document.createElementNS(svgNs, 'text');
-  offLabel.setAttribute('x', peakX2 + 10);
-  offLabel.setAttribute('y', padT - 14);
-  offLabel.setAttribute('font-size', '11');
-  offLabel.setAttribute('font-weight', '500');
-  offLabel.setAttribute('fill', '#22C55E');
-  offLabel.setAttribute('letter-spacing', '0.04em');
-  offLabel.style.textTransform = 'uppercase';
-  offLabel.textContent = 'OFF-PEAK →';
-  svg.appendChild(offLabel);
-
-  const baseline = document.createElementNS(svgNs, 'line');
-  baseline.setAttribute('x1', padL);
-  baseline.setAttribute('y1', padT + innerH);
-  baseline.setAttribute('x2', padL + innerW);
-  baseline.setAttribute('y2', padT + innerH);
-  baseline.setAttribute('stroke', '#64748B');
-  baseline.setAttribute('stroke-width', '1');
-  svg.appendChild(baseline);
-
-  hourly.forEach((d, i) => {
-    if (d.n === 0) return;
-    const barH = (d.n / maxN) * innerH;
-    const barW = colW * 0.72;
+  bins.forEach((b, i) => {
+    const total = b.switch + b.marginal;
+    if (total === 0) return;
+    const totalH = (total / yTicks) * innerH;
+    const switchH = (b.switch / yTicks) * innerH;
+    const marginalH = (b.marginal / yTicks) * innerH;
     const x = padL + i * colW + (colW - barW) / 2;
-    const y = padT + innerH - barH;
-    const inPeak = i < 8;
+    const yTop = padT + innerH - totalH;
 
-    const bar = document.createElementNS(svgNs, 'rect');
-    bar.setAttribute('x', x);
-    bar.setAttribute('y', y);
-    bar.setAttribute('width', barW);
-    bar.setAttribute('height', barH);
-    bar.setAttribute('fill', inPeak ? '#F8FAFC' : '#22C55E');
-    bar.setAttribute('rx', '2');
-    svg.appendChild(bar);
+    if (b.switch > 0) {
+      const rect = document.createElementNS(svgNs, 'rect');
+      rect.setAttribute('x', x);
+      rect.setAttribute('y', yTop + marginalH);
+      rect.setAttribute('width', barW);
+      rect.setAttribute('height', switchH);
+      rect.setAttribute('fill', '#22C55E');
+      rect.setAttribute('rx', '2');
+      svg.appendChild(rect);
+    }
+    if (b.marginal > 0) {
+      const rect = document.createElementNS(svgNs, 'rect');
+      rect.setAttribute('x', x);
+      rect.setAttribute('y', yTop);
+      rect.setAttribute('width', barW);
+      rect.setAttribute('height', marginalH);
+      rect.setAttribute('fill', '#F59E0B');
+      rect.setAttribute('rx', '2');
+      svg.appendChild(rect);
+    }
 
     const num = document.createElementNS(svgNs, 'text');
     num.setAttribute('x', x + barW / 2);
-    num.setAttribute('y', y - 7);
+    num.setAttribute('y', yTop - 8);
     num.setAttribute('text-anchor', 'middle');
     num.setAttribute('font-size', '13');
     num.setAttribute('font-weight', '600');
-    num.setAttribute('fill', inPeak ? '#F8FAFC' : '#22C55E');
-    num.textContent = d.n;
+    num.setAttribute('fill', '#F8FAFC');
+    num.textContent = total;
     svg.appendChild(num);
+
+    const xLbl = document.createElementNS(svgNs, 'text');
+    xLbl.setAttribute('x', x + barW / 2);
+    xLbl.setAttribute('y', padT + innerH + 20);
+    xLbl.setAttribute('text-anchor', 'middle');
+    xLbl.setAttribute('font-size', '12');
+    xLbl.setAttribute('fill', '#94A3B8');
+    xLbl.textContent = b.label;
+    svg.appendChild(xLbl);
   });
 
-  const labelText = {14: '2pm', 16: '4pm', 18: '6pm', 20: '8pm', 22: '10pm'};
-  hourly.forEach((d, i) => {
-    if (!(d.h in labelText)) return;
-    const x = padL + i * colW + colW / 2;
-    const lbl = document.createElementNS(svgNs, 'text');
-    lbl.setAttribute('x', x);
-    lbl.setAttribute('y', padT + innerH + 18);
-    lbl.setAttribute('text-anchor', 'middle');
-    lbl.setAttribute('font-size', '12');
-    lbl.setAttribute('fill', '#64748B');
-    lbl.textContent = labelText[d.h];
-    svg.appendChild(lbl);
-  });
+  const xAxisLabel = document.createElementNS(svgNs, 'text');
+  xAxisLabel.setAttribute('x', padL + innerW / 2);
+  xAxisLabel.setAttribute('y', padT + innerH + 44);
+  xAxisLabel.setAttribute('text-anchor', 'middle');
+  xAxisLabel.setAttribute('font-size', '11');
+  xAxisLabel.setAttribute('font-weight', '500');
+  xAxisLabel.setAttribute('fill', '#94A3B8');
+  xAxisLabel.setAttribute('letter-spacing', '0.04em');
+  xAxisLabel.style.textTransform = 'uppercase';
+  xAxisLabel.textContent = 'Share of usage in TOU peak hours';
+  svg.appendChild(xAxisLabel);
 
   host.appendChild(svg);
 }
 
-renderChart(FALLBACK.hourly);
+renderChart(FALLBACK.peak_pct_bins);
 
 (async function loadStats() {
   try {
@@ -696,7 +756,7 @@ renderChart(FALLBACK.hourly);
     const stats = await res.json();
     applyScalarStats(stats);
     if (Array.isArray(stats.states)) renderStates(stats.states);
-    if (Array.isArray(stats.hourly)) renderChart(stats.hourly);
+    if (Array.isArray(stats.peak_pct_bins)) renderChart(stats.peak_pct_bins);
   } catch (e) {
   }
 })();
