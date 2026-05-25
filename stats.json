@@ -7,19 +7,13 @@
   "n_stay": 0,
   "median_savings_rm": 8.84,
   "median_kwh": 513,
-  "peak_n_good": 28,
-  "peak_n_total": 30,
-  "hourly": [
-    {"h": 14, "n": 0},
-    {"h": 15, "n": 1},
-    {"h": 16, "n": 0},
-    {"h": 17, "n": 0},
-    {"h": 18, "n": 1},
-    {"h": 19, "n": 4},
-    {"h": 20, "n": 6},
-    {"h": 21, "n": 18},
-    {"h": 22, "n": 0},
-    {"h": 23, "n": 0}
+  "median_peak_pct": 21,
+  "peak_pct_bins": [
+    {"label": "10–15%", "switch": 1, "marginal": 0},
+    {"label": "15–20%", "switch": 8, "marginal": 1},
+    {"label": "20–25%", "switch": 15, "marginal": 0},
+    {"label": "25–30%", "switch": 4, "marginal": 0},
+    {"label": "30–35%", "switch": 2, "marginal": 0}
   ],
   "states": [
     {"name": "Selangor", "n": 19},
