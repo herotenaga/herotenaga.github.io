@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-05-25T22:30:11Z",
+  "scope_note": "general_tariff_only",
+  "n_total": 31,
+  "n_switch": 30,
+  "n_marginal": 1,
+  "n_stay": 0,
+  "median_savings_rm": 8.84,
+  "median_kwh": 513,
+  "peak_n_good": 28,
+  "peak_n_total": 30,
+  "hourly": [
+    {"h": 14, "n": 0},
+    {"h": 15, "n": 1},
+    {"h": 16, "n": 0},
+    {"h": 17, "n": 0},
+    {"h": 18, "n": 1},
+    {"h": 19, "n": 4},
+    {"h": 20, "n": 6},
+    {"h": 21, "n": 18},
+    {"h": 22, "n": 0},
+    {"h": 23, "n": 0}
+  ],
+  "states": [
+    {"name": "Selangor", "n": 19},
+    {"name": "Johor", "n": 4},
+    {"name": "Pulau Pinang", "n": 3},
+    {"name": "Kedah", "n": 1}
+  ]
+}

@@ -4,14 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
 <title>Hero Tenaga · Free Time-of-Use bill checker for TNB customers</title>
 <meta name="description" content="A free, independent tool that reads your myTNB SmartLiving usage and shows whether the Time-of-Use tariff would save you money. Built by a Malaysian energy analyst.">
 <meta name="keywords" content="TNB Time-of-Use, TOU tariff Malaysia, TNB tariff calculator, myTNB SmartLiving, Malaysia electricity bill, peak off-peak tariff, TNB bill checker">
 <meta name="author" content="Hero Tenaga">
 <link rel="canonical" href="https://herotenaga.github.io/">
 
-<!-- Open Graph -->
 <meta property="og:title" content="Hero Tenaga · Free Time-of-Use bill checker for TNB customers">
 <meta property="og:description" content="See whether the Time-of-Use tariff would save you money. Free, independent, runs on your own device.">
 <meta property="og:type" content="website">
@@ -19,13 +17,11 @@
 <meta property="og:image" content="https://herotenaga.github.io/report-preview.png">
 <meta property="og:locale" content="en_MY">
 
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hero Tenaga · Free TNB Time-of-Use bill checker">
 <meta name="twitter:description" content="See whether the Time-of-Use tariff would save you money on your TNB bill.">
 <meta name="twitter:image" content="https://herotenaga.github.io/report-preview.png">
 
-<!-- Structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -74,10 +70,7 @@
     padding: 0 24px;
   }
 
-  /* HEADER */
-  header {
-    padding: 28px 0 0;
-  }
+  header { padding: 28px 0 0; }
 
   .brand {
     display: inline-flex;
@@ -104,10 +97,7 @@
     letter-spacing: -0.01em;
   }
 
-  /* HERO */
-  .hero {
-    padding: 80px 0 56px;
-  }
+  .hero { padding: 80px 0 56px; }
 
   .eyebrow {
     display: inline-flex;
@@ -203,10 +193,7 @@
     height: auto;
   }
 
-  /* SECTIONS */
-  section {
-    padding: 64px 0;
-  }
+  section { padding: 64px 0; }
 
   .section-eyebrow {
     font-size: 11px;
@@ -233,10 +220,7 @@
     margin-bottom: 36px;
   }
 
-  /* WHY — quote-style */
-  .why {
-    border-top: 1px solid var(--border);
-  }
+  .why { border-top: 1px solid var(--border); }
 
   .why blockquote {
     font-size: clamp(22px, 2.8vw, 26px);
@@ -257,7 +241,85 @@
     margin-bottom: 22px;
   }
 
-  /* HOW — step rows with screenshots */
+  .findings { border-top: 1px solid var(--border); }
+
+  .findings-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.08s;
+  }
+
+  .findings-card:hover {
+    border-color: rgba(34, 197, 94, 0.4);
+  }
+
+  .findings-card:active { transform: translateY(1px); }
+
+  .findings-number {
+    font-size: clamp(44px, 6vw, 64px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--green);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .findings-number .denom {
+    color: var(--text-3);
+    font-size: 0.5em;
+    font-weight: 500;
+  }
+
+  .findings-claim {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 6px;
+    max-width: 32ch;
+  }
+
+  .findings-sub {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .findings-sub .inline-link {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .findings-arrow {
+    color: var(--text-3);
+    font-size: 22px;
+    line-height: 1;
+    transition: color 0.15s, transform 0.15s;
+    flex-shrink: 0;
+  }
+
+  .findings-card:hover .findings-arrow {
+    color: var(--green);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .findings-card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px;
+    }
+    .findings-arrow { display: none; }
+  }
+
   .how { border-top: 1px solid var(--border); }
 
   .steps-list {
@@ -300,7 +362,10 @@
     color: var(--text-2);
     line-height: 1.6;
     max-width: 38ch;
+    margin-bottom: 18px;
   }
+
+  .step-desc:last-child { margin-bottom: 0; }
 
   .step-image {
     border-radius: 10px;
@@ -315,68 +380,66 @@
     display: block;
   }
 
-  @media (max-width: 720px) {
-    .step-row { grid-template-columns: 1fr; gap: 16px; }
-    .step-image { order: -1; }
-  }
-
-  /* INSTALL */
-  .install { border-top: 1px solid var(--border); }
-
-  .install-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 32px;
-    display: flex;
+  .step-install-btn {
+    display: inline-flex;
     align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .install-icon {
-    width: 56px;
-    height: 56px;
+    gap: 9px;
     background: var(--green);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .install-text {
-    flex: 1;
-    min-width: 220px;
-  }
-
-  .install-title {
-    font-size: 17px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-
-  .install-desc {
+    color: var(--bg);
+    padding: 11px 18px;
+    border-radius: 10px;
     font-size: 14px;
-    color: var(--text-2);
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.15s, transform 0.08s;
   }
 
-  .install-meta {
-    margin-top: 18px;
-    font-size: 13px;
+  .step-install-btn:hover { opacity: 0.92; }
+  .step-install-btn:active { transform: translateY(1px); }
+
+  .step-install-meta {
+    margin-top: 14px;
+    font-size: 12.5px;
     color: var(--text-3);
-    text-align: center;
   }
 
-  .install-meta a {
+  .step-install-meta a {
     color: var(--text-2);
     text-decoration: none;
     border-bottom: 1px dotted var(--text-3);
   }
 
-  .install-meta a:hover { color: var(--text); border-bottom-color: var(--text-2); }
+  .step-install-meta a:hover {
+    color: var(--text);
+    border-bottom-color: var(--text-2);
+  }
 
-  /* FAQ */
+  .how-end {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .how-end-text {
+    font-size: 15px;
+    color: var(--text-2);
+  }
+
+  .how-end-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  @media (max-width: 720px) {
+    .step-row { grid-template-columns: 1fr; gap: 16px; }
+    .step-image { order: -1; }
+  }
+
   .faq { border-top: 1px solid var(--border); }
 
   details {
@@ -421,7 +484,6 @@
     max-width: 60ch;
   }
 
-  /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
     padding: 36px 0;
@@ -462,13 +524,10 @@
 
   .footer-links a:hover { color: var(--text); }
 
-  /* MISC */
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
     overflow: hidden;
     clip: rect(0,0,0,0);
     white-space: nowrap;
@@ -493,7 +552,6 @@
 
 <main>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <div class="eyebrow">
@@ -502,7 +560,7 @@
       <h1>See if Time-of-Use saves you money on your <em>TNB bill</em>.</h1>
       <p class="hero-sub">Hero Tenaga reads the half-hourly usage data already in your myTNB SmartLiving account and shows your bill under both the general and Time-of-Use tariffs. Your data never leaves your browser.</p>
       <div class="cta-row">
-        <a href="#install" class="btn-primary">
+        <a href="#how" class="btn-primary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
@@ -519,12 +577,11 @@
       </div>
 
       <div class="preview">
-        <img src="report-preview.png" alt="Sample Hero Tenaga report showing a side-by-side comparison of the general tariff (RM334.85) and Time-of-Use tariff (RM324.33) for a Malaysian household, with a recommendation to switch.">
+        <img src="report-preview.png" alt="Sample Hero Tenaga report showing 'Should you switch? Yes, you save RM9.88 this month', with a side-by-side comparison of the general tariff (RM333.29) and Time-of-Use tariff (RM323.40), peak vs off-peak donut charts, and an hourly usage pattern.">
       </div>
     </div>
   </section>
 
-  <!-- WHY -->
   <section class="why" id="why">
     <div class="container">
       <div class="section-eyebrow">Why this exists</div>
@@ -533,7 +590,25 @@
     </div>
   </section>
 
-  <!-- HOW -->
+  <section class="findings" id="findings">
+    <div class="container">
+      <div class="section-eyebrow">Findings</div>
+      <h2>What households are finding so far.</h2>
+      <p class="lead">Anyone using Hero Tenaga can choose to share their analysis. The aggregated, anonymised results so far point in one direction.</p>
+
+      <a href="stats.html" class="findings-card" aria-label="See the full findings page">
+        <div class="findings-number">
+          <span data-stat="n_switch">30</span><span class="denom">/<span data-stat="n_total">31</span></span>
+        </div>
+        <div>
+          <p class="findings-claim">households on the General tariff would save by switching to Time-of-Use</p>
+          <p class="findings-sub">Median saving RM<span data-stat="median_savings_rm">8.84</span>/month · <span data-stat="peak_n_good">28</span> of <span data-stat="peak_n_total">30</span> already peak after 7pm · <span class="inline-link">See method and full breakdown</span></p>
+        </div>
+        <span class="findings-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
   <section class="how" id="how">
     <div class="container">
       <div class="section-eyebrow">How it works</div>
@@ -543,70 +618,54 @@
 
         <div class="step-row">
           <div class="step-text">
-            <span class="step-num">Step 1</span>
-            <div class="step-title">Open My Energy</div>
+            <span class="step-num">Step 1 / 3</span>
+            <div class="step-title">Add Hero Tenaga to Chrome</div>
+            <p class="step-desc">Free, no account required. Works on Chrome, Edge, and other Chromium browsers on desktop.</p>
+            <a href="https://chromewebstore.google.com/detail/fkogjfnkdhehpkcpomcplkamaiaggncl" target="_blank" rel="noopener" class="step-install-btn">
+              Add to Chrome
+            </a>
+            <p class="step-install-meta">
+              Open source on <a href="https://github.com/herotenaga/herotenaga.github.io" target="_blank" rel="noopener">GitHub</a> · <a href="privacy.html">Privacy policy</a>
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="step-1.png" alt="Chrome Web Store page for Hero Tenaga TOU Advisor showing the 'Add to Chrome' button highlighted by a green arrow.">
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-text">
+            <span class="step-num">Step 2 / 3</span>
+            <div class="step-title">Login to myTNB</div>
             <p class="step-desc">From your myTNB dashboard, click <strong style="color:var(--text);font-weight:500;">View Energy Usage</strong> to open SmartLiving in a new tab.</p>
           </div>
           <div class="step-image">
-            <img src="step-1.png" alt="myTNB account dashboard with View Energy Usage link highlighted in the Active Account panel.">
+            <img src="step-2.png" alt="myTNB account dashboard with 'View Energy Usage' link highlighted by a green arrow in the Active Account panel.">
           </div>
         </div>
 
         <div class="step-row">
           <div class="step-text">
-            <span class="step-num">Step 2</span>
-            <div class="step-title">Switch to My Energy and click the icon</div>
-            <p class="step-desc">On SmartLiving, open the <strong style="color:var(--text);font-weight:500;">My Energy</strong> tab, then click the Hero Tenaga icon in your browser toolbar.</p>
+            <span class="step-num">Step 3 / 3</span>
+            <div class="step-title">Click Hero Tenaga icon</div>
+            <p class="step-desc">On SmartLiving's My Energy tab, click the Hero Tenaga icon in your browser toolbar. Set your billing dates (the end date auto-fills to a 30-day cycle and you can adjust within 28 to 31 days). Click <strong style="color:var(--text);font-weight:500;">Run analysis</strong> and your report appears in about a minute.</p>
           </div>
           <div class="step-image">
-            <img src="step-2.png" alt="SmartLiving My Energy tab open in Chrome, with the Hero Tenaga toolbar icon highlighted at the top of the browser.">
-          </div>
-        </div>
-
-        <div class="step-row">
-          <div class="step-text">
-            <span class="step-num">Step 3</span>
-            <div class="step-title">Run the analysis</div>
-            <p class="step-desc">Pick your billing start date. The end date auto-fills to 30 days later and you can adjust within a 28 to 31 day cycle. Click <strong style="color:var(--text);font-weight:500;">Run analysis</strong> and your report appears in about a minute.</p>
-          </div>
-          <div class="step-image">
-            <img src="step-3.png" alt="Hero Tenaga popup showing the Run analysis button highlighted, ready to read the user's energy data.">
+            <img src="step-3.png" alt="SmartLiving My Energy tab open in Chrome with the Hero Tenaga popup showing billing date pickers and the green Run analysis button.">
           </div>
         </div>
 
       </div>
-    </div>
-  </section>
 
-  <!-- INSTALL -->
-  <section class="install" id="install">
-    <div class="container">
-      <div class="section-eyebrow">Install</div>
-      <h2>Add Hero Tenaga to Chrome.</h2>
-      <p class="lead">Free, no account required. Works on Chrome, Edge, and other Chromium browsers on desktop.</p>
-
-      <div class="install-card">
-        <div class="install-icon">
-          <svg width="28" height="32" viewBox="0 0 10 12" aria-hidden="true">
-            <path d="M6 0L0 7h4l-1 5L9 5H5L6 0z" fill="#0F172A"/>
-          </svg>
-        </div>
-        <div class="install-text">
-          <div class="install-title">Hero Tenaga for Chrome</div>
-          <div class="install-desc">Available on the Chrome Web Store. One click to install.</div>
-        </div>
-        <a href="https://chromewebstore.google.com/detail/fkogjfnkdhehpkcpomcplkamaiaggncl" target="_blank" rel="noopener" class="btn-primary">
+      <div class="how-end">
+        <p class="how-end-text">Ready to check your bill? <strong>Step 1 takes ten seconds.</strong></p>
+        <a href="https://chromewebstore.google.com/detail/fkogjfnkdhehpkcpomcplkamaiaggncl" target="_blank" rel="noopener" class="step-install-btn">
           Add to Chrome
         </a>
       </div>
-
-      <p class="install-meta">
-        Open source on <a href="https://github.com/herotenaga/herotenaga.github.io" target="_blank" rel="noopener">GitHub</a> · <a href="privacy.html">Privacy policy</a>
-      </p>
     </div>
   </section>
 
-  <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">
       <div class="section-eyebrow">Questions</div>
@@ -650,13 +709,30 @@
       </div>
       <div class="footer-links">
         <a href="#why">Why</a>
+        <a href="stats.html">Findings</a>
         <a href="#how">How</a>
-        <a href="#install">Install</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+(async function loadStats() {
+  try {
+    const res = await fetch('stats.json', { cache: 'no-cache' });
+    if (!res.ok) return;
+    const stats = await res.json();
+    document.querySelectorAll('[data-stat]').forEach(el => {
+      const key = el.getAttribute('data-stat');
+      if (!(key in stats)) return;
+      const v = stats[key];
+      el.textContent = (key === 'median_savings_rm') ? Number(v).toFixed(2) : v;
+    });
+  } catch (e) {
+  }
+})();
+</script>
 
 </body>
 </html>

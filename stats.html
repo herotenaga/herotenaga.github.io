@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Findings · Hero Tenaga</title>
+<meta name="description" content="What Hero Tenaga is finding so far. Aggregated, anonymised stats from real TNB bills contributed by Malaysian households.">
+<meta name="author" content="Hero Tenaga">
+<link rel="canonical" href="https://herotenaga.github.io/stats.html">
+
+<meta property="og:title" content="Findings · Hero Tenaga">
+<meta property="og:description" content="30 of 31 Malaysian households on the General tariff would save by switching to Time-of-Use. Here's what the contributions show so far.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://herotenaga.github.io/stats.html">
+<meta property="og:locale" content="en_MY">
+
+<link rel="icon" type="image/png" sizes="128x128" href="icon128.png">
+<link rel="apple-touch-icon" href="icon128.png">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0F172A;
+    --surface:   #131C30;
+    --surface-2: #1A2640;
+    --green:     #22C55E;
+    --green-d:   #16A34A;
+    --text:      #F8FAFC;
+    --text-2:    #94A3B8;
+    --text-3:    #64748B;
+    --border:    rgba(255,255,255,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header { padding: 28px 0 0; }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .mark {
+    width: 28px;
+    height: 28px;
+    background: var(--green);
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .page-head { padding: 56px 0 8px; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-size: clamp(32px, 4.5vw, 44px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    max-width: 22ch;
+  }
+
+  .head-meta {
+    font-size: 14px;
+    color: var(--text-3);
+    margin-bottom: 8px;
+  }
+
+  .head-meta strong { color: var(--text-2); font-weight: 500; }
+
+  .hero-stat {
+    padding: 40px 0 56px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .hero-stat-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .big-number {
+    font-size: clamp(72px, 12vw, 112px);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--green);
+  }
+
+  .big-number .denom {
+    color: var(--text-3);
+    font-size: 0.45em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .big-claim {
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+    max-width: 24ch;
+  }
+
+  .big-sub {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.55;
+    max-width: 38ch;
+  }
+
+  .big-sub .accent { color: var(--text); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .hero-stat-row { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+
+  .stat-cell {
+    padding: 22px 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-cell:last-child { border-right: 0; }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-value .unit {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: 0;
+    margin-left: 2px;
+  }
+
+  .stat-value .denom {
+    color: var(--text-3);
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 720px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-cell { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stat-cell:nth-child(2n) { border-right: 0; }
+    .stat-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  }
+
+  .chart-block { margin-bottom: 56px; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+    max-width: 28ch;
+  }
+
+  .chart-sub {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.55;
+    max-width: 56ch;
+    margin-bottom: 28px;
+  }
+
+  .chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px 20px;
+  }
+
+  .chart-svg { display: block; width: 100%; height: auto; }
+
+  .states-block { margin-bottom: 56px; }
+
+  .states-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .state-pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .state-pill .name { color: var(--text-2); }
+  .state-pill .count { color: var(--text); font-weight: 500; }
+
+  .method {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-bottom: 24px;
+  }
+
+  .method h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .method p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+    margin-bottom: 12px;
+    max-width: 70ch;
+  }
+
+  .method p:last-child { margin-bottom: 0; }
+
+  .method strong { color: var(--text); font-weight: 500; }
+
+  .stats-cta {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cta-text-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .cta-text-sub {
+    font-size: 14px;
+    color: var(--text-2);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--green);
+    color: var(--bg);
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.08s;
+    font-family: inherit;
+    flex-shrink: 0;
+  }
+
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-primary:active { transform: translateY(1px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 0;
+    margin-top: 56px;
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-meta {
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .footer-meta a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+
+  .footer-meta a:hover { color: var(--text); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+  }
+
+  .footer-links a {
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="/" class="brand" aria-label="Hero Tenaga home">
+      <span class="mark">
+        <svg width="13" height="15" viewBox="0 0 10 12" aria-hidden="true">
+          <path d="M6 0L0 7h4l-1 5L9 5H5L6 0z" fill="#0F172A"/>
+        </svg>
+      </span>
+      <span class="brand-name">Hero Tenaga</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span> Findings
+      </div>
+      <h1>What Hero Tenaga is finding so far.</h1>
+      <p class="head-meta">Scope: <strong>households on the General tariff</strong> who contributed a verified TNB bill · Updated <span id="updated-date">25 May 2026</span></p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <section class="hero-stat" aria-labelledby="hero-stat-title">
+      <h2 id="hero-stat-title" class="sr-only">Headline finding</h2>
+      <div class="hero-stat-row">
+        <div class="big-number" aria-label="Headline ratio">
+          <span data-stat="n_switch">30</span><span class="denom">/<span data-stat="n_total">31</span></span>
+        </div>
+        <div>
+          <p class="big-claim">would save money by switching to Time-of-Use</p>
+          <p class="big-sub">Median saving <span class="accent">RM<span data-stat="median_savings_rm">8.84</span>/month</span> · <span data-stat="n_marginal">1</span> marginal · <span data-stat="n_stay">0</span> stay</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-strip" aria-label="Summary statistics">
+      <div class="stat-cell">
+        <div class="stat-label">Households</div>
+        <div class="stat-value" data-stat="n_total">31</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Median usage</div>
+        <div class="stat-value"><span data-stat="median_kwh">513</span><span class="unit">kWh</span></div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Peak after 7pm</div>
+        <div class="stat-value"><span data-stat="peak_n_good">28</span><span class="denom">/<span data-stat="peak_n_total">30</span></span></div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">States</div>
+        <div class="stat-value" data-stat-derived="states-count">4</div>
+      </div>
+    </section>
+
+    <section class="chart-block">
+      <div class="section-eyebrow">Why so many can switch</div>
+      <h2>Most household peaks land after TOU peak hours end.</h2>
+      <p class="chart-sub">Hour of daily peak load for switchers. The shaded zone is when TOU charges its peak rate (weekdays, 2pm to 10pm). Almost no one peaks during those hours.</p>
+      <div class="chart-wrap">
+        <div id="chart" role="img" aria-label="Bar chart showing distribution of peak load hours across switchers. Peaks cluster at 8pm to 10pm, outside TOU peak window."></div>
+      </div>
+    </section>
+
+    <section class="states-block">
+      <div class="section-eyebrow">Where contributions came from</div>
+      <div class="states-list" id="states-list">
+        <span class="state-pill"><span class="name">Selangor</span><span class="count">19</span></span>
+        <span class="state-pill"><span class="name">Johor</span><span class="count">4</span></span>
+        <span class="state-pill"><span class="name">Pulau Pinang</span><span class="count">3</span></span>
+        <span class="state-pill"><span class="name">Kedah</span><span class="count">1</span></span>
+      </div>
+    </section>
+
+    <section class="method">
+      <h3>Method</h3>
+      <p>
+        <strong>How this is computed.</strong>
+        Each row is one household submitting one TNB bill. Test entries and any billing window outside 28 to 31 days are excluded. Households already on TOU are excluded pending a fix to how the extension reads peak-period data on that tariff. Savings are calculated using the same RP4 tariff formulas TNB publishes.
+      </p>
+      <p>
+        <strong>A note on the sample.</strong>
+        The current sample is small and skews toward people who suspected TOU might help them. Read the headline rate as a directional signal, not a population-level claim. The "peak after 7pm" finding is the steadier observation.
+      </p>
+    </section>
+
+    <div class="stats-cta">
+      <div>
+        <p class="cta-text-title">Check your own bill.</p>
+        <p class="cta-text-sub">Free, runs on your device, your data stays in your browser.</p>
+      </div>
+      <a href="/#how" class="btn-primary">Install for Chrome</a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-meta">
+        © 2026 Hero Tenaga · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="license noopener">CC BY-NC-ND 4.0</a>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/#why">Why</a>
+        <a href="/#how">How</a>
+        <a href="/#faq">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const FALLBACK = {
+  generated_at: "2026-05-25T22:30:11Z",
+  hourly: [
+    {h: 14, n: 0}, {h: 15, n: 1}, {h: 16, n: 0}, {h: 17, n: 0},
+    {h: 18, n: 1}, {h: 19, n: 4}, {h: 20, n: 6}, {h: 21, n: 18},
+    {h: 22, n: 0}, {h: 23, n: 0}
+  ],
+  states: [
+    {name: "Selangor", n: 19},
+    {name: "Johor", n: 4},
+    {name: "Pulau Pinang", n: 3},
+    {name: "Kedah", n: 1}
+  ]
+};
+
+function applyScalarStats(stats) {
+  document.querySelectorAll('[data-stat]').forEach(el => {
+    const key = el.getAttribute('data-stat');
+    if (!(key in stats)) return;
+    const v = stats[key];
+    el.textContent = (key === 'median_savings_rm') ? Number(v).toFixed(2) : v;
+  });
+  if (Array.isArray(stats.states)) {
+    document.querySelectorAll('[data-stat-derived="states-count"]').forEach(el => {
+      el.textContent = stats.states.length;
+    });
+  }
+  if (stats.generated_at) {
+    const d = new Date(stats.generated_at);
+    if (!isNaN(d)) {
+      const el = document.getElementById('updated-date');
+      if (el) el.textContent = d.toLocaleDateString('en-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+  }
+}
+
+function renderStates(states) {
+  const list = document.getElementById('states-list');
+  if (!list || !Array.isArray(states)) return;
+  list.innerHTML = '';
+  states.forEach(s => {
+    const pill = document.createElement('span');
+    pill.className = 'state-pill';
+    pill.innerHTML = `<span class="name">${s.name}</span><span class="count">${s.n}</span>`;
+    list.appendChild(pill);
+  });
+}
+
+function renderChart(hourly) {
+  const host = document.getElementById('chart');
+  if (!host || !Array.isArray(hourly)) return;
+  host.innerHTML = '';
+  const svgNs = 'http://www.w3.org/2000/svg';
+  const maxN = Math.max(1, ...hourly.map(d => d.n));
+  const W = 800, H = 240;
+  const padL = 16, padR = 16, padT = 32, padB = 36;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+  const colW = innerW / hourly.length;
+
+  const svg = document.createElementNS(svgNs, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('class', 'chart-svg');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+  const peakX1 = padL;
+  const peakX2 = padL + 8 * colW;
+
+  const peakBg = document.createElementNS(svgNs, 'rect');
+  peakBg.setAttribute('x', peakX1);
+  peakBg.setAttribute('y', padT - 8);
+  peakBg.setAttribute('width', peakX2 - peakX1);
+  peakBg.setAttribute('height', innerH + 8);
+  peakBg.setAttribute('fill', '#1A2640');
+  svg.appendChild(peakBg);
+
+  const peakBoundary = document.createElementNS(svgNs, 'line');
+  peakBoundary.setAttribute('x1', peakX2);
+  peakBoundary.setAttribute('y1', padT - 8);
+  peakBoundary.setAttribute('x2', peakX2);
+  peakBoundary.setAttribute('y2', padT + innerH);
+  peakBoundary.setAttribute('stroke', '#64748B');
+  peakBoundary.setAttribute('stroke-width', '1');
+  peakBoundary.setAttribute('stroke-dasharray', '3,4');
+  svg.appendChild(peakBoundary);
+
+  const peakLabel = document.createElementNS(svgNs, 'text');
+  peakLabel.setAttribute('x', peakX1 + 10);
+  peakLabel.setAttribute('y', padT - 14);
+  peakLabel.setAttribute('font-size', '11');
+  peakLabel.setAttribute('font-weight', '500');
+  peakLabel.setAttribute('fill', '#94A3B8');
+  peakLabel.setAttribute('letter-spacing', '0.04em');
+  peakLabel.style.textTransform = 'uppercase';
+  peakLabel.textContent = 'TOU PEAK · 2PM – 10PM';
+  svg.appendChild(peakLabel);
+
+  const offLabel = document.createElementNS(svgNs, 'text');
+  offLabel.setAttribute('x', peakX2 + 10);
+  offLabel.setAttribute('y', padT - 14);
+  offLabel.setAttribute('font-size', '11');
+  offLabel.setAttribute('font-weight', '500');
+  offLabel.setAttribute('fill', '#22C55E');
+  offLabel.setAttribute('letter-spacing', '0.04em');
+  offLabel.style.textTransform = 'uppercase';
+  offLabel.textContent = 'OFF-PEAK →';
+  svg.appendChild(offLabel);
+
+  const baseline = document.createElementNS(svgNs, 'line');
+  baseline.setAttribute('x1', padL);
+  baseline.setAttribute('y1', padT + innerH);
+  baseline.setAttribute('x2', padL + innerW);
+  baseline.setAttribute('y2', padT + innerH);
+  baseline.setAttribute('stroke', '#64748B');
+  baseline.setAttribute('stroke-width', '1');
+  svg.appendChild(baseline);
+
+  hourly.forEach((d, i) => {
+    if (d.n === 0) return;
+    const barH = (d.n / maxN) * innerH;
+    const barW = colW * 0.72;
+    const x = padL + i * colW + (colW - barW) / 2;
+    const y = padT + innerH - barH;
+    const inPeak = i < 8;
+
+    const bar = document.createElementNS(svgNs, 'rect');
+    bar.setAttribute('x', x);
+    bar.setAttribute('y', y);
+    bar.setAttribute('width', barW);
+    bar.setAttribute('height', barH);
+    bar.setAttribute('fill', inPeak ? '#F8FAFC' : '#22C55E');
+    bar.setAttribute('rx', '2');
+    svg.appendChild(bar);
+
+    const num = document.createElementNS(svgNs, 'text');
+    num.setAttribute('x', x + barW / 2);
+    num.setAttribute('y', y - 7);
+    num.setAttribute('text-anchor', 'middle');
+    num.setAttribute('font-size', '13');
+    num.setAttribute('font-weight', '600');
+    num.setAttribute('fill', inPeak ? '#F8FAFC' : '#22C55E');
+    num.textContent = d.n;
+    svg.appendChild(num);
+  });
+
+  const labelText = {14: '2pm', 16: '4pm', 18: '6pm', 20: '8pm', 22: '10pm'};
+  hourly.forEach((d, i) => {
+    if (!(d.h in labelText)) return;
+    const x = padL + i * colW + colW / 2;
+    const lbl = document.createElementNS(svgNs, 'text');
+    lbl.setAttribute('x', x);
+    lbl.setAttribute('y', padT + innerH + 18);
+    lbl.setAttribute('text-anchor', 'middle');
+    lbl.setAttribute('font-size', '12');
+    lbl.setAttribute('fill', '#64748B');
+    lbl.textContent = labelText[d.h];
+    svg.appendChild(lbl);
+  });
+
+  host.appendChild(svg);
+}
+
+renderChart(FALLBACK.hourly);
+
+(async function loadStats() {
+  try {
+    const res = await fetch('stats.json', { cache: 'no-cache' });
+    if (!res.ok) return;
+    const stats = await res.json();
+    applyScalarStats(stats);
+    if (Array.isArray(stats.states)) renderStates(stats.states);
+    if (Array.isArray(stats.hourly)) renderChart(stats.hourly);
+  } catch (e) {
+  }
+})();
+</script>
+
+</body>
+</html>
