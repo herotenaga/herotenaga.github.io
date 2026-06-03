@@ -1,24 +1,31 @@
 {
-  "generated_at": "2026-05-25T22:30:11Z",
+  "generated_at": "2026-06-04T00:00:00Z",
   "scope_note": "general_tariff_only",
-  "n_total": 31,
-  "n_switch": 30,
-  "n_marginal": 1,
+  "n_total": 47,
+  "n_switch": 45,
+  "n_marginal": 2,
   "n_stay": 0,
-  "median_savings_rm": 8.84,
-  "median_kwh": 513,
-  "median_peak_pct": 21,
+  "median_savings_rm": 9.88,
+  "median_general_bill_rm": 214.96,
+  "median_kwh": 597,
+  "median_peak_pct": 22,
+  "savings_range_txt": "range 3%\u20139%",
   "peak_pct_bins": [
-    {"label": "10–15%", "switch": 1, "marginal": 0},
-    {"label": "15–20%", "switch": 8, "marginal": 1},
-    {"label": "20–25%", "switch": 15, "marginal": 0},
-    {"label": "25–30%", "switch": 4, "marginal": 0},
-    {"label": "30–35%", "switch": 2, "marginal": 0}
+    {"label": "10\u201315%", "switch": 3,  "marginal": 0},
+    {"label": "15\u201320%", "switch": 8,  "marginal": 0},
+    {"label": "20\u201325%", "switch": 18, "marginal": 1},
+    {"label": "25\u201330%", "switch": 7,  "marginal": 1},
+    {"label": "30\u201335%", "switch": 7,  "marginal": 0},
+    {"label": "35\u201340%", "switch": 2,  "marginal": 0}
   ],
   "states": [
-    {"name": "Selangor", "n": 19},
-    {"name": "Johor", "n": 4},
+    {"name": "Selangor",     "n": 26},
+    {"name": "Melaka",       "n": 4},
+    {"name": "Johor",        "n": 4},
     {"name": "Pulau Pinang", "n": 3},
-    {"name": "Kedah", "n": 1}
+    {"name": "Kuala Lumpur", "n": 3},
+    {"name": "Putrajaya",    "n": 1},
+    {"name": "Kedah",        "n": 1},
+    {"name": "Terengganu",   "n": 1}
   ]
 }
