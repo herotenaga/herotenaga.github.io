@@ -512,7 +512,7 @@
       <h3>Method</h3>
       <p>
         <strong>How this is computed.</strong>
-        Each row is one household submitting one TNB bill. Test entries and any billing window outside 28 to 31 days are excluded. Households already on TOU are excluded pending a fix to how the extension reads peak-period data on that tariff. Savings are calculated using the same RP4 tariff formulas TNB publishes.
+        Each row is one household submitting one TNB bill. Test entries and any billing window outside 28 to 31 days are excluded. Households already on TOU are supported from v0.6.2 onwards and will appear in future datasets.. Savings are calculated using the same RP4 tariff formulas TNB publishes.
       </p>
       <p>
         <strong>What "peak share" means.</strong>
@@ -554,19 +554,24 @@
 
 <script>
 const FALLBACK = {
-  generated_at: "2026-05-25T22:30:11Z",
+  generated_at: "2026-06-04T00:00:00Z",
   peak_pct_bins: [
-    {label: "10–15%", switch: 1, marginal: 0},
-    {label: "15–20%", switch: 8, marginal: 1},
-    {label: "20–25%", switch: 15, marginal: 0},
-    {label: "25–30%", switch: 4, marginal: 0},
-    {label: "30–35%", switch: 2, marginal: 0}
+    {label: "10–15%", switch: 3,  marginal: 0},
+    {label: "15–20%", switch: 8,  marginal: 0},
+    {label: "20–25%", switch: 18, marginal: 1},
+    {label: "25–30%", switch: 7,  marginal: 1},
+    {label: "30–35%", switch: 7,  marginal: 0},
+    {label: "35–40%", switch: 2,  marginal: 0}
   ],
   states: [
-    {name: "Selangor", n: 19},
-    {name: "Johor", n: 4},
+    {name: "Selangor",     n: 26},
+    {name: "Melaka",       n: 4},
+    {name: "Johor",        n: 4},
     {name: "Pulau Pinang", n: 3},
-    {name: "Kedah", n: 1}
+    {name: "Kuala Lumpur", n: 3},
+    {name: "Putrajaya",    n: 1},
+    {name: "Kedah",        n: 1},
+    {name: "Terengganu",   n: 1}
   ]
 };
 
